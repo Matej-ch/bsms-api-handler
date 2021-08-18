@@ -25,7 +25,13 @@ class BsmsSender
     /** @var array */
     private $mtSms = [];
 
-    public function __construct($username, $password, $sender, $type = 'gsm')
+    /**
+     * @param string $username User login
+     * @param string $password User password
+     * @param string $sender Sender name, max. 11 characters Default: InfoSMS
+     * @param string $type gsm/utf8
+     */
+    public function __construct(string $username, string $password, string $sender = '', string $type = 'gsm')
     {
         $this->username = $username;
         $this->password = $password;
@@ -33,16 +39,27 @@ class BsmsSender
         $this->type = $type;
     }
 
-    public function addSms($id, $msisdn, $message): void
+    /**
+     * @param string|int $id Unique message ID
+     * @param string|int $msisdn phone number
+     * @param string $message body of the sms
+     */
+    public function addSms($id, $msisdn, string $message): void
     {
-        $this->mtSms[$id] = array(
+        $this->mtSms[$id] = [
             'id' => $id,
             'msisdn' => $this->cleanNum($msisdn),
             'text' => $message,
-        );
+        ];
     }
 
-    public function send($validate = false)
+    /**
+     * Send sms or only validate
+     *
+     * @param false $validate
+     * @return mixed
+     */
+    public function send(bool $validate = false)
     {
 
         $url = $validate ? $this->validateUrl : $this->sendUrl;
@@ -91,7 +108,13 @@ class BsmsSender
         return $result['response']['recipients'];
     }
 
-    private function cleanNum($msisdn)
+    /**
+     * Clean given phone number for api, cannot start with + sign or 00
+     *
+     * @param $msisdn
+     * @return string
+     */
+    private function cleanNum($msisdn): string
     {
         $msisdn = (string)$msisdn;
 
@@ -114,9 +137,14 @@ class BsmsSender
             $msisdn = "421$msisdn";
         }
 
-        return $msisdn;
+        return (string)$msisdn;
     }
 
+    /**
+     * Error messages that can occur during processing request
+     *
+     * @return string[]
+     */
     private function explanations(): array
     {
         return [
