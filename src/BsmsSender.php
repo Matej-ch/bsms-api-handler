@@ -18,9 +18,14 @@ class BsmsSender
     /** @var string */
     private $type;
 
+    /** @var string */
     public $sendUrl = 'http://api.bsms.viamobile.sk/json/send';
 
+    /** @var string */
     public $validateUrl = 'https://api.bsms.viamobile.sk/json/validate';
+
+    /** @var string */
+    public $statusUrl = 'https://api.bsms.viamobile.sk/json/hlr';
 
     /** @var array */
     private $mtSms = [];
@@ -157,5 +162,25 @@ class BsmsSender
             2001 => 'Posielanie SMS nie je povolené. Prosím, kontaktuje Viamobile',
             2002 => 'Nedostatok kreditu',
         ];
+    }
+
+    public function getStatus($msisdn)
+    {
+        $msisdn = $this->cleanNum($msisdn);
+
+        $auth = base64_encode("$this->username:$this->password");
+        $options = [
+            'http' => [
+                'header'  => "Content-Type: text/xml;charset=UTF-8\r\n" .
+                    "Authorization: Basic $auth\r\n" .
+                    "Host: api.bsms.viamobile.sk\r\n",
+                'method'  => 'GET',
+                'ignore_errors' => true
+            ],
+        ];
+
+        $url = "$this->statusUrl?msisdn=$msisdn";
+        $context  = stream_context_create($options);
+        return @file_get_contents($url, false, $context);
     }
 }
