@@ -19,7 +19,7 @@ class BsmsSender
     private $type;
 
     /** @var string */
-    public $sendUrl = 'http://api.bsms.viamobile.sk/json/send';
+    public $sendUrl = 'https://api.bsms.viamobile.sk/json/send';
 
     /** @var string */
     public $validateUrl = 'https://api.bsms.viamobile.sk/json/validate';

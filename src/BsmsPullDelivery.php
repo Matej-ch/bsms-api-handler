@@ -17,7 +17,7 @@ class BsmsPullDelivery
     private $password;
     private $deliveries = [];
 
-    public $deliveryUrl = 'http://api.bsms.viamobile.sk/json/delivery';
+    public $deliveryUrl = 'https://api.bsms.viamobile.sk/json/delivery';
 
     public function __construct($username, $password)
     {
@@ -67,12 +67,12 @@ class BsmsPullDelivery
             throw new RuntimeException("Response is not valid JSON");
         }
 
-        if($result['response']['status'] !== '200') {
+        if((int)$result['response']['status'] !== 200) {
             $code =  $result['response']['code'] ?? '__code is missing__';
             $desc = $result['response']['description'] ?? '__description is missing__';
             throw new RuntimeException("Exception occured. Error code=" . $code . ', message=' . $desc);
         }
 
-        return $result['response']['delivery'] ?? 'Delivery not found';
+        return $result['response'];
     }
 }
