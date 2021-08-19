@@ -4,6 +4,17 @@ namespace matejch\bsmsApiHandler;
 
 use RuntimeException;
 
+/**
+ * @property string $username
+ * @property string $password
+ * @property string $sender
+ * @property string $type
+ * @property array $mtSms
+ *
+ * @property string $sendUrl
+ * @property string $validateUrl
+ * @property string $statusUrl
+ */
 class BsmsSender
 {
     /** @var string */

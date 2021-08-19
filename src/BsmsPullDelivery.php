@@ -13,10 +13,16 @@ use RuntimeException;
  */
 class BsmsPullDelivery
 {
+    /** @var string */
     private $username;
+
+    /** @var string */
     private $password;
+
+    /** @var array */
     private $deliveries = [];
 
+    /** @var string */
     public $deliveryUrl = 'https://api.bsms.viamobile.sk/json/delivery';
 
     public function __construct($username, $password)
