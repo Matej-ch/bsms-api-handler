@@ -38,10 +38,29 @@ For using api username and password is required
 ```php
 
 $sender = new \matejch\bsmsApiHandler\BsmsSender($username, $password);
+
+/** multiple sms can be sent at once */
 $sender->addSms($id,$phoneNum,$message);
+$sender->addSms($id2,$phoneNum2,$message2);
+
 $sender->send();
 
 ```
+### Inquiring delivery status
+
+
+
+```php
+
+$sender = new \matejch\bsmsApiHandler\BsmsPullDelivery($username, $password);
+
+/** multiple deliveries can be requested at once */
+$sender->addDelivery($id) //id of sms used in addSms method
+$sender->addDelivery($id2);
+
+$sender->send();
+```
+
 
 
 
