@@ -14,9 +14,17 @@
         "php": ">=7.2.0",
         "ext-json": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
     "autoload": {
         "psr-4": {
             "matejch\\bsmsApiHandler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "matejch\\bsmsApiHandler\\tests\\": "tests/"
         }
     }
 }
