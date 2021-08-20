@@ -1,6 +1,6 @@
 {
     "name": "matejch/bsms-api-handler",
-    "description": "Api for sending sms with viamobile bsms",
+    "description": "Implementation of request for sending sms with viamobile bsms",
     "type": "library",
     "keywords": ["sms"," bsms"," viamobile","api"],
     "license": "MIT",

@@ -2,6 +2,8 @@
 
 namespace matejch\bsmsApiHandler;
 
+
+
 use RuntimeException;
 
 /**
@@ -74,10 +76,10 @@ class BsmsSender
      *
      * @param false $validate
      * @return mixed
+     * @throws \Exception
      */
     public function send(bool $validate = false)
     {
-
         $url = $validate ? $this->validateUrl : $this->sendUrl;
 
         $data = [];
@@ -89,6 +91,10 @@ class BsmsSender
             'message' => '',
             'type' => $this->type,
         ];
+
+        if(empty($this->mtSms)) {
+            throw new RuntimeException("No sms added");
+        }
 
         $data['recipients'] = $this->mtSms;
 
@@ -103,6 +109,7 @@ class BsmsSender
                 'ignore_errors' => true
             ],
         ];
+
         $context  = stream_context_create($options);
         $result = @file_get_contents($url, false, $context);
 

@@ -2,7 +2,9 @@
 
 namespace matejch\bsmsApiHandler\tests;
 
-class BsmsPullDeliveryTest
+use PHPUnit\Framework\TestCase;
+
+class BsmsPullDeliveryTest extends TestCase
 {
 
 }
