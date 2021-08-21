@@ -110,7 +110,7 @@ class BsmsSender
             ],
         ];
 
-        $context  = stream_context_create($options);
+        $context = stream_context_create($options);
         $result = @file_get_contents($url, false, $context);
 
         if($result === false) {
@@ -123,12 +123,10 @@ class BsmsSender
         }
 
         if($result['response']['status'] !== '200') {
-            $explanations = $this->explanations()[$result['response']['code']] ?? '';
-
-            throw new RuntimeException("Exception occured. Error code= {$result['response']['code']}, message={$result['response']['description']}, $explanations");
+            $result['response']['explanations'] = $this->explanations()[$result['response']['code']] ?? '';
         }
 
-        return $result['response']['recipients'];
+        return json_encode($result['response']);
     }
 
     /**

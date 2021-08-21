@@ -49,6 +49,11 @@ class BsmsPullDelivery
         $data['password'] = $this->password;
 
         $data['deliveries'] = $this->deliveries;
+
+        if(empty($this->deliveries)) {
+            throw new RuntimeException("No deliveries added");
+        }
+
         $json = json_encode($data);
 
 
