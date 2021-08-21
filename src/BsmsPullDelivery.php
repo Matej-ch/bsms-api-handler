@@ -78,12 +78,6 @@ class BsmsPullDelivery
             throw new RuntimeException("Response is not valid JSON");
         }
 
-        if((int)$result['response']['status'] !== 200) {
-            $code =  $result['response']['code'] ?? '__code is missing__';
-            $desc = $result['response']['description'] ?? '__description is missing__';
-            throw new RuntimeException("Exception occured. Error code=" . $code . ', message=' . $desc);
-        }
-
-        return $result['response'];
+        return json_encode($result['response']);
     }
 }
