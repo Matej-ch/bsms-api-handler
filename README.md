@@ -14,13 +14,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist matejch/bsms-api-handler "*"
+php composer.phar require --prefer-dist matejch/bsms-api-handler "^1.0"
 ```
 
 or add
 
 ```
-"matejch/bsms-api-handler": "*"
+"matejch/bsms-api-handler": "^1.0"
 ```
 
 to the require section of your `composer.json` file.
